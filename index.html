@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce In Javascript</title>
+</head>
+<body>
+  <div class="">
+    <div class="">
+      <input style="width: 50%; padding: 15px; margin: 100px; border-radius: 10px;font-size: 24px;" type="text" id="userInput">
+    </div>
+    <p id="userName" style="margin-left: 100px;font-size: 24px;"></p>
+  </div>
+
+
+
+
+
+  <script>
+
+    const Input = document.getElementById("userInput");
+    const UserName = document.getElementById("userName");
+
+    function generateName(event) {
+      UserName.textContent = event.target.value;
+      // console.log(event.target.value);
+    }
+
+    function debouncedName (cb, delay){
+      let timeout;
+      return function(...args){
+        clearInterval(timeout);
+        timeout = setTimeout(()=> cb(...args), delay);
+      }
+    }
+
+    Input.addEventListener("keypress", debouncedName(generateName, 500));
+
+  </script>
+</body>
+</html>
